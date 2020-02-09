@@ -73249,7 +73249,7 @@ var routes = [{
     auth: false
   }
 }, {
-  path: '/home/',
+  path: '/home',
   name: 'home',
   component: _views_Home__WEBPACK_IMPORTED_MODULE_3__["default"],
   meta: {
