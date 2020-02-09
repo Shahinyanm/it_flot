@@ -22,8 +22,8 @@ class PostResource extends JsonResource
             'description_ru' => $this->translate('ru')->description,
             'user' => $this->user->name,
             'user_id' => $this->user->id,
-            'category_en' => $this->category->translate('en')->type,
-            'category_ru' => $this->category->translate('ru')->type,
+            'category_en' => $this->category ? $this->category->translate('en')->type : null,
+            'category_ru' => $this->category ? $this->category->translate('ru')->type : null,
         ];
     }
 }

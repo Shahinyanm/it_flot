@@ -2,8 +2,9 @@
     <section>
 
 
-        <b-field :label="$t('main.categories')">
-            <b-select placeholder="Select a category"  @change.native="choseCategory($event)">
+        <b-field :label="$t('main.categories')" v-if="home">
+            <b-select placeholder="Select a category" v-model="selectedCategory" @change.native="choseCategory">
+                <option value="">{{$t('main.all')}}</option>
                 <option
                     :key="category.id"
                     :value="category.slug"
@@ -82,7 +83,7 @@
 
 <script>
     export default {
-        props: ['user'],
+        props: ['user','home'],
         data () {
             return {
                 posts_list: [],
@@ -90,21 +91,27 @@
                 showDetailIcon: true,
                 locale: this.$i18n.locale,
                 categories:[],
+                selectedCategory:'',
+                slug:this.$route.params.slug? this.$route.params.slug : null,
             }
         },
         mounted () {
-            this.getPosts()
+            this.getPosts(this.slug)
             this.getCategories()
         },
         methods: {
             toggle (row) {
                 this.$refs.table.toggleDetails(row)
             },
-            getPosts () {
+            getPosts (slug) {
                 const app = this
-                axios.get('/posts').then(response => {
-                    let data = {}
-
+                let url ='/posts';
+                if(slug){
+                    url =`/posts/${slug}`
+                }
+                console.log(slug, url)
+                axios.get(url).then(response => {
+                    app.posts_list= [];
                     $.each(response.data.data, function (ket, item) {
                         app.posts_list.push({
                             id: item.id,
@@ -132,13 +139,16 @@
                     this.categories = response.data.data
                 })
             },
-            choseCategory(category){
-                this.$router.push(`/home/${category.slug}`)
+            choseCategory(){
+                this.$router.push(`/home/${this.selectedCategory}`)
+                this.getPosts(this.selectedCategory)
             },
             onDelete(item) {
+                const app = this
                 axios.delete(`/posts/${item.id}`).then(response => {
+                    app.posts_list = app.posts_list.filter(x=>x.id !==item.id);
                     this.$buefy.toast.open(this.$t('main.deleted'));
-                    this.posts_list.find(item).remove;
+
                 });
             }
         },

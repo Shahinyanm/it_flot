@@ -3391,29 +3391,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user'],
+  props: ['user', 'home'],
   data: function data() {
     return {
       posts_list: [],
       defaultOpenedDetails: [],
       showDetailIcon: true,
       locale: this.$i18n.locale,
-      categories: []
+      categories: [],
+      selectedCategory: '',
+      slug: this.$route.params.slug ? this.$route.params.slug : null
     };
   },
   mounted: function mounted() {
-    this.getPosts();
+    this.getPosts(this.slug);
     this.getCategories();
   },
   methods: {
     toggle: function toggle(row) {
       this.$refs.table.toggleDetails(row);
     },
-    getPosts: function getPosts() {
+    getPosts: function getPosts(slug) {
       var app = this;
-      axios.get('/posts').then(function (response) {
-        var data = {};
+      var url = '/posts';
+
+      if (slug) {
+        url = "/posts/".concat(slug);
+      }
+
+      console.log(slug, url);
+      axios.get(url).then(function (response) {
+        app.posts_list = [];
         $.each(response.data.data, function (ket, item) {
           app.posts_list.push({
             id: item.id,
@@ -3441,16 +3451,20 @@ __webpack_require__.r(__webpack_exports__);
         _this.categories = response.data.data;
       });
     },
-    choseCategory: function choseCategory(category) {
-      this.$router.push("/home/".concat(category.slug));
+    choseCategory: function choseCategory() {
+      this.$router.push("/home/".concat(this.selectedCategory));
+      this.getPosts(this.selectedCategory);
     },
     onDelete: function onDelete(item) {
       var _this2 = this;
 
+      var app = this;
       axios["delete"]("/posts/".concat(item.id)).then(function (response) {
-        _this2.$buefy.toast.open(_this2.$t('main.deleted'));
+        app.posts_list = app.posts_list.filter(function (x) {
+          return x.id !== item.id;
+        });
 
-        _this2.posts_list.find(item).remove;
+        _this2.$buefy.toast.open(_this2.$t('main.deleted'));
       });
     }
   },
@@ -57079,38 +57093,53 @@ var render = function() {
   return _c(
     "section",
     [
-      _c(
-        "b-field",
-        { attrs: { label: _vm.$t("main.categories") } },
-        [
-          _c(
-            "b-select",
-            {
-              attrs: { placeholder: "Select a category" },
-              nativeOn: {
-                change: function($event) {
-                  return _vm.choseCategory($event)
-                }
-              }
-            },
-            _vm._l(_vm.categories, function(category) {
-              return _c(
-                "option",
-                { key: category.id, domProps: { value: category.slug } },
+      _vm.home
+        ? _c(
+            "b-field",
+            { attrs: { label: _vm.$t("main.categories") } },
+            [
+              _c(
+                "b-select",
+                {
+                  attrs: { placeholder: "Select a category" },
+                  nativeOn: {
+                    change: function($event) {
+                      return _vm.choseCategory($event)
+                    }
+                  },
+                  model: {
+                    value: _vm.selectedCategory,
+                    callback: function($$v) {
+                      _vm.selectedCategory = $$v
+                    },
+                    expression: "selectedCategory"
+                  }
+                },
                 [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(category[_vm.$i18n.locale].type) +
-                      "\n            "
-                  )
-                ]
+                  _c("option", { attrs: { value: "" } }, [
+                    _vm._v(_vm._s(_vm.$t("main.all")))
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.categories, function(category) {
+                    return _c(
+                      "option",
+                      { key: category.id, domProps: { value: category.slug } },
+                      [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(category[_vm.$i18n.locale].type) +
+                            "\n            "
+                        )
+                      ]
+                    )
+                  })
+                ],
+                2
               )
-            }),
-            0
+            ],
+            1
           )
-        ],
-        1
-      ),
+        : _vm._e(),
       _vm._v(" "),
       _c("b-field", { attrs: { "group-multiline": "", grouped: "" } }, [
         _c(
@@ -57592,9 +57621,9 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", [_vm._v(_vm._s(_vm.$t("main.home")))]),
+      _c("div", [_vm._v(_vm._s(_vm.$t("main.posts_with_filter")))]),
       _vm._v(" "),
-      _c("Posts")
+      _c("Posts", { attrs: { home: true } })
     ],
     1
   )

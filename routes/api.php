@@ -27,5 +27,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::get('categories/{category?}','CategoryController@index');
 
-    Route::apiResource('posts','PostController');
+//    Route::apiResource('posts','PostController');
+    Route::get('/posts/{slug?}','PostController@index');
+    Route::post('/posts','PostController@store');
+    Route::delete('posts/{id}','PostController@destroy');
 });

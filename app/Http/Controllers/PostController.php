@@ -19,11 +19,18 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @param  null  $slug
+     * @return PostsResource
      */
-    public function index()
+    public function index($slug=null)
     {
         $posts = Post::with('category')->get();
+        if($slug){
+            $posts = Post::whereHas('category',function($q) use ($slug){
+                $q->where('slug',$slug);
+            })->get();
+        }
+
         return new PostsResource($posts);
     }
 

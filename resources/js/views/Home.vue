@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div>{{$t('main.home')}}</div>
-        <Posts></Posts>
+        <div>{{$t('main.posts_with_filter')}}</div>
+        <Posts :home="true"></Posts>
     </div>
 </template>
 

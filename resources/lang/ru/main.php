@@ -17,4 +17,19 @@ return [
     'password_confirmation' =>'Подтвердите пароль',
     'categories' =>'Категории',
 
+    'save' => 'Сохранить',
+    'add_post' => 'Добавить публикацию',
+    'next_page' => 'Следующая страницу',
+    'prev_page' => 'Предыдушая страница',
+    'language' => 'Язык',
+    'title_en' => 'Название English',
+    'title_ru' => 'Название Русский',
+    'description_en' => 'Описание English',
+    'description_ru' => 'Описание Русский',
+    'deleted' => 'Удалено',
+    'posts_with_filter' => 'Публикации с фильтрами',
+    'all' => 'Все',
+    'actions' => 'Действия',
+
+
 ];

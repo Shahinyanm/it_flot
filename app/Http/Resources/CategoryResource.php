@@ -17,7 +17,8 @@ class CategoryResource extends JsonResource
         return [
             'en'=>['type' =>$this->translate('en')->type],
             'ru'=>['type' =>$this->translate('ru')->type],
-            'slug' =>$this->slug
+            'slug' =>$this->slug,
+            'id'=>$this->id,
         ];
     }
 }

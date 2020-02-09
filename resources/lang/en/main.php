@@ -28,4 +28,9 @@ return [
     'title_ru' => 'Title Russian',
     'description_en' => 'Description English',
     'description_ru' => 'Description Russian',
+    'deleted' => 'Deleted',
+    'posts_with_filter' => 'Posts with filter',
+    'all' => 'All',
+    'actions' => 'Actions',
+
 ];
