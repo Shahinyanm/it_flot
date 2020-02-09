@@ -1,94 +1,43 @@
 <template>
-    <section class="hero">
-        <div class="hero-body">
-            <div class="container">
-                <div class="columns is-marginless is-centered">
-                    <div class="column is-5">
-                        <div class="card">
-                            <header class="card-header">
-                                <h2 class="subtitle is-4 card-header-title">Profile</h2>
-                            </header>
+    <div>
+        <b-button  type="is-danger" @click="showModal" style="float:right">{{ $t('main.add_post') }}</b-button>
 
-                            <div class="card-content">
-                                <section>
-                                    <b-field label="Simple">
-                                        <b-select placeholder="Select a category" v-model="category">
-                                            <option
-                                                :key="category.id"
-                                                :value="category.id"
-                                                v-for="category in categories">
-                                                {{ category.type }}
-                                            </option>
-                                        </b-select>
-                                    </b-field>
+        <Posts :user="$auth.user().id" ></Posts>
 
-                                    <b-field>
-                                        <b-input placeholder="Title" type="name" v-model="title"></b-input>
-                                    </b-field>
-
-                                    <b-field>
-                                        <b-input maxlength="100"
-                                                 minlength="10"
-                                                 placeholder="Maxlength automatically counts characters"
-                                                 type="textarea"
-                                                 v-model="description">
-                                        </b-input>
-                                    </b-field>
-                                    <b-button @click="save" type="is-primary">Save</b-button>
-
-                                </section>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 </template>
 
 <script>
+    import Posts from '../components/Posts'
+    import AddPost from '../components/AddPost'
+
     export default {
         name: 'Profile',
+        components: {Posts, AddPost},
+
         data() {
             return {
-                title: '',
-                description: '',
-                category:'',
-                categories: []
+
+                showForm:false,
             }
         },
-        mounted(){
-            this.getCategories();
-            console.log()
-        },
+
         created(){
 
             },
         methods: {
-            save() {
-                const app = this;
-                let formData =
-                axios
-                .post('/posts',{
-                        title: app.title,
-                        description: app.description,
-                        category:app.category,
-                        user: this.$auth.user().id
-                })
-                .then(response => {
-                    if (response.status === 201){
-                        this.$router.push({name: 'home'})
+            showModal(){
+                    this.$buefy.modal.open({
+                        parent: this,
+                        component: AddPost,
+                        // hasModalCard: true,
+                        // customClass: 'custom-class custom-class-2',
+                        trapFocus: true
+                    })
 
-                    }
-                })
             },
-            getCategories(){
-                axios
-                .get('/categories')
-                .then(response => {
-                    this.categories = response.data.data
-                })
-            },
+
+
         }
     }
 </script>

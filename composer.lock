@@ -4,8 +4,72 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cb247f1810cc928b9793fb00c222eb2",
+    "content-hash": "d84d9e719fa2c0644ff0a9459f1efec9",
     "packages": [
+        {
+            "name": "astrotomic/laravel-translatable",
+            "version": "v11.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Astrotomic/laravel-translatable.git",
+                "reference": "889f8b91f28a8a72873099cf452945adbd03dc9f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Astrotomic/laravel-translatable/zipball/889f8b91f28a8a72873099cf452945adbd03dc9f",
+                "reference": "889f8b91f28a8a72873099cf452945adbd03dc9f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "5.8.* || ^6.0",
+                "illuminate/database": "5.8.* || ^6.0",
+                "illuminate/support": "5.8.* || ^6.0",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.8.* || ^4.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Astrotomic\\Translatable\\TranslatableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Astrotomic\\Translatable\\": "src/Translatable/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tom Witkowski",
+                    "email": "dev.gummibeer@gmail.com",
+                    "homepage": "https://gummibeer.de",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Dimitrios Savvopoulos",
+                    "email": "ds@dimsav.com",
+                    "homepage": "http://dimsav.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel package for multilingual models",
+            "keywords": [
+                "database",
+                "language",
+                "laravel",
+                "translation"
+            ],
+            "time": "2020-01-28T11:49:28+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "v0.1.1",
@@ -421,6 +485,59 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "kg-bot/laravel-localization-to-vue",
+            "version": "v1.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kg-bot/laravel-localization-to-vue.git",
+                "reference": "e408847ac5d278327c261685716bdc11cf5d9c8c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kg-bot/laravel-localization-to-vue/zipball/e408847ac5d278327c261685716bdc11cf5d9c8c",
+                "reference": "e408847ac5d278327c261685716bdc11cf5d9c8c",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*|^6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "KgBot\\LaravelLocalization\\LaravelLocalizationServiceProvider"
+                    ],
+                    "aliases": {
+                        "ExportLocalization": "KgBot\\LaravelLocalization\\Facades\\ExportLocalizations"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "KgBot\\LaravelLocalization\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stefan Ninic",
+                    "email": "ninicstefan94@gmail.com"
+                }
+            ],
+            "description": "Laravel package used to collect all localization files from resources/lang directory and sub-directories and make them available as JSON file",
+            "keywords": [
+                "Vue.js",
+                "json",
+                "laravel",
+                "localization",
+                "trans"
+            ],
+            "time": "2019-12-17T12:35:37+00:00"
         },
         {
             "name": "laravel/framework",

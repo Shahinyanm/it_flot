@@ -16,26 +16,30 @@ class CategoriesTableSeeder extends Seeder
     {
         $categories = [
             [
-                'type' => 'Авто',
-                'slug' => 'auto'
+                'slug' => 'auto',
+                'en'=>[ 'type' => 'Automobile'],
+                'ru'=>[ 'type' => 'Авто'],
             ],
             [
-                'type' => 'Недвижимость',
+                'en'=>[ 'type' => 'Rentails'],
+                'ru'=>[ 'type' => 'Недвижимость'],
                 'slug' => 'rent'
             ],
             [
-                'type' => 'Услуги',
+                'en'=>[ 'type' => 'Service'],
+                'ru'=>[ 'type' => 'Услуги'],
                 'slug' => 'service'
             ],
             [
-                'type' => 'Работа',
+                'en'=>[ 'type' => 'Jobs',],
+                'ru'=>[ 'type' => 'Работа'],
                 'slug' => 'job'
             ],
 
         ];
 
         foreach($categories as $category){
-            \App\Category::firstOrCreate($category);
+            \App\Category::create($category);
         }
 
     }

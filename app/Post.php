@@ -4,10 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
-class Post extends Model
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
+class Post extends Model implements TranslatableContract
 {
-    protected $fillable = ['title','description','category_id','user_id'];
+    use Translatable;
+
+    public $translatedAttributes = ['title', 'description'];
+    protected $fillable = ['category_id','user_id'];
 
     /**
      * @return BelongsTo
@@ -22,4 +26,6 @@ class Post extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+
 }

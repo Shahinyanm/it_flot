@@ -16,10 +16,14 @@ class PostResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
+            'title_en' => $this->translate('en')->title,
+            'title_ru' => $this->translate('ru')->title,
+            'description_en' => $this->translate('en')->description,
+            'description_ru' => $this->translate('ru')->description,
             'user' => $this->user->name,
-            'category' => $this->category->type,
+            'user_id' => $this->user->id,
+            'category_en' => $this->category->translate('en')->type,
+            'category_ru' => $this->category->translate('ru')->type,
         ];
     }
 }

@@ -7,25 +7,24 @@
                     <template slot="brand">
                         <b-navbar-item :to="{ path: '/' }" tag="router-link">
                             <img
-                                alt="Lightweight UI components for Vue.js based on Bulma"
                                 src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
                             >
                         </b-navbar-item>
                     </template>
                     <template slot="start">
                         <b-navbar-item tag="router-link" :to="{name: 'home'}">
-                            Home
+                            <p>{{ $t('main.home') }}</p>
                         </b-navbar-item>
                     </template>
 
                     <template slot="end">
                         <b-navbar-item tag="div">
                             <div class="buttons">
-                                <router-link v-if="!$auth.check()" :to="{ name: 'register' }" class="button is-primary"> <strong>Sign up</strong></router-link>
-                                <router-link  v-if="!$auth.check()" :to="{ name: 'login' }" class="button is-light">Log in</router-link>
-                                <router-link  v-if="$auth.check()" :to="{ name: 'profile' }" class="button is-light">Profile</router-link>
-                                <b-button v-if="$auth.check()" type="is-danger" @click.prevent="$auth.logout()">Log out</b-button>
-
+                                <router-link v-if="!$auth.check()" :to="{ name: 'register' }" class="button is-primary"> <strong>{{ $t('main.register') }}</strong></router-link>
+                                <router-link  v-if="!$auth.check()" :to="{ name: 'login' }" class="button is-light">{{ $t('main.login') }}</router-link>
+                                <router-link  v-if="$auth.check()" :to="{ name: 'profile' }" class="button is-light">{{ $t('main.profile') }}</router-link>
+                                <b-button v-if="$auth.check()" type="is-danger" @click.prevent="$auth.logout()">{{ $t('main.logout') }}</b-button>
+                                <Locale @changedLanguage="updateTable"></Locale>
                             </div>
                         </b-navbar-item>
                     </template>
@@ -38,5 +37,13 @@
     </div>
 </template>
 <script>
-    export default {}
+    import Locale from "./Locale"
+    export default {
+        components:{Locale},
+        methods:{
+            updateTable(){
+
+            }
+        }
+    }
 </script>

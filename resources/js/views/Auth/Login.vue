@@ -6,26 +6,26 @@
                     <div class="column is-5">
                         <div class="card">
                             <header class="card-header">
-                                <h2 class="subtitle is-4 card-header-title">Sign In</h2>
+                                <h2 class="subtitle is-4 card-header-title">{{$t('main.login')}}</h2>
                             </header>
 
                             <div class="card-content">
                                 <form action="#" class="login-form" method="POST">
                                     <section>
-                                        <b-field label="Email">
+                                        <b-field :label="$t('main.email')">
                                             <b-input maxlength="30"
                                                      type="email"
                                                      v-model="email">
                                             </b-input>
                                         </b-field>
-                                        <b-field label="Password">
+                                        <b-field :label="$t('main.password')">
                                             <b-input type="password"
                                                      v-model="password"
                                                      password-reveal></b-input>
                                         </b-field>
 
 
-                                        <b-button type="is-primary" @click="login">Log In</b-button>
+                                        <b-button type="is-primary" @click="login">{{$t('main.login')}}</b-button>
 
                                     </section>
                                 </form>

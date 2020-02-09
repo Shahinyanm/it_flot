@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use ExportLocalization;
 use Illuminate\Support\ServiceProvider;
+use View;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
@@ -23,6 +26,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer(
+            'app',
+            function ($view) {
+                return $view->with(
+                    [
+                        'messages' => ExportLocalization::export()->toArray(),
+                    ]
+                );
+            }
+        );
     }
 }

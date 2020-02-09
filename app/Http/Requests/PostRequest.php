@@ -25,8 +25,10 @@ class PostRequest extends FormRequest
     {
         return [
             'category' =>['required'],
-            'title' =>['required'],
-            'description' =>['required']
+            'title_en' =>['required'],
+            'title_ru' =>['required'],
+            'description_en' =>['required'],
+            'description_ru' =>['required']
         ];
     }
 }

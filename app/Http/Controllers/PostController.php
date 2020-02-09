@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = \App\Post::with('category')->get();
+        $posts = Post::with('category')->get();
         return new PostsResource($posts);
     }
 
@@ -35,40 +35,25 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $post = Post::create(
-            [
-                'title' => $request->title,
-                'description' => $request->description,
-                'category_id' => $request->category,
-                'user_id' =>$request->user
-            ]
-        );
+        $data = [
+            'category_id' => $request->category,
+            'user_id' => $request->user,
+            'en' => [
+                'title' => $request->title_en,
+                'description' => $request->description_en
+            ],
+            'ru' => [
+                'title' => $request->title_ru,
+                'description' => $request->description_ru
+            ],
+
+        ];
+        $post = Post::create($data);
+
 
         return new PostResource($post);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int      $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -78,6 +63,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::find($id)->delete();
+        return response(['status' => 'success'], 201);
     }
 }

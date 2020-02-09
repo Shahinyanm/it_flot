@@ -28,13 +28,21 @@ const routes = [
             }
         },
         {
-            path: '/home',
+            path: '/home/',
             name: 'home',
             component: Home,
             meta: {
                 auth: true
             }
         },
+    {
+        path: '/home/:slug',
+        name: 'home',
+        component: Home,
+        meta: {
+            auth: true
+        }
+    },
     {
         path: '/profile',
         name: 'profile',

@@ -21,11 +21,10 @@ Route::prefix('auth')->group(function () {
         Route::post('logout', 'AuthController@logout');
     });
 });
+Route::get('/setLocale/{locale}','LocalizationController@setLocale');
 
 Route::group(['middleware' => 'auth:api'], function(){
-    // Users
-    Route::get('users', 'UserController@index')->middleware('isAdmin');
-    Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
+
     Route::get('categories/{category?}','CategoryController@index');
 
     Route::apiResource('posts','PostController');

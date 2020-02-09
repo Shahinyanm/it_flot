@@ -15,7 +15,8 @@ class CategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type' =>$this->type,
+            'en'=>['type' =>$this->translate('en')->type],
+            'ru'=>['type' =>$this->translate('ru')->type],
             'slug' =>$this->slug
         ];
     }

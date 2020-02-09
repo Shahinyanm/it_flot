@@ -6,16 +6,16 @@
                     <div class="column is-5">
                         <div class="card">
                             <header class="card-header">
-                                <h2 class="subtitle is-4 card-header-title">Sign Up</h2>
+                                <h2 class="subtitle is-4 card-header-title">{{$t('main.register')}}</h2>
                             </header>
 
                             <div class="card-content">
                                 <form  action="#" class="login-form" method="POST">
                                     <section>
-                                        <b-field label="Name">
+                                        <b-field :label="$t('main.name')">
                                             <b-input v-model="name" ></b-input>
                                         </b-field>
-                                        <b-field label="Email">
+                                        <b-field :label="$t('main.email')">
 <!--                                                 message="This email is invalid"-->
 <!--                                                 type="is-danger"-->
                                             <b-input v-model="email" maxlength="30"
@@ -23,15 +23,15 @@
                                                      value="">
                                             </b-input>
                                         </b-field>
-                                        <b-field label="Password">
+                                        <b-field :label="$t('main.password')">
                                             <b-input v-model="password" password-reveal type="password"></b-input>
                                         </b-field>
-                                        <b-field label="Password Confirmation">
+                                        <b-field :label="$t('main.password_confirmation')">
                                             <b-input password-reveal type="password" v-model="password_confirmation"></b-input>
                                         </b-field>
 
 
-                                        <b-button type="is-primary" @click="register">Sign Up</b-button>
+                                        <b-button type="is-primary" @click="register">{{$t('main.register')}}</b-button>
 
                                     </section>
                                 </form>

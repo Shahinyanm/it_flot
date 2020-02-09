@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Category;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CategoriesResource extends ResourceCollection
@@ -14,6 +15,10 @@ class CategoriesResource extends ResourceCollection
      */
     public function toArray($request)
     {
+
+        $this->collection->transform(function (Category $category) {
+            return (new CategoryResource($category));
+        });
         return parent::toArray($request);
     }
 }

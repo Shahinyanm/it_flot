@@ -4,10 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 
-class Category extends Model
+/**
+ * Class Category
+ *
+ * @package App
+ */
+class Category extends Model implements TranslatableContract
 {
-    protected $fillable = ['type','slug'];
+    use Translatable;
+
+    public $translatedAttributes = ['type'];
+
+    protected $fillable = ['slug'];
 
     /**
      * One to Many Relationship for Post model
